@@ -1,9 +1,0 @@
-package com.masai.CrimeDao;
-
-import com.masai.Bean.Crime;
-
-public interface Crimes {
-
-	String AddCrimeDetails(Crime c);
-	
-}

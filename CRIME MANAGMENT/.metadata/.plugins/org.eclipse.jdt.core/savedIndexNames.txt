@@ -1,5 +1,0 @@
-INDEX VERSION 1.131+C:\Users\Nikhil\Desktop\Project-3\unique-stretch-3372\.metadata\.plugins\org.eclipse.jdt.core
-340395760.index
-1865797976.index
-4065709502.index
-1204765773.index
