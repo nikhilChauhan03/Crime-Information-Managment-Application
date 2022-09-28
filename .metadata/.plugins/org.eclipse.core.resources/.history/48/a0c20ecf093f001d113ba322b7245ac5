@@ -1,0 +1,64 @@
+package com.masai.crimeUseCase;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.util.Date;
+import java.util.Scanner;
+
+import com.masai.Bean.Crime;
+
+public class CrimeRegister {
+
+	public static void main(String[] args)
+	{
+		
+//		Crime c = new Crime();
+		
+		Scanner s1 = new Scanner(System.in);
+		System.out.println("Enter the name of the crime");
+		String name = s1.nextLine();
+		
+		System.out.println("Enter the Number of Victims");
+		int vict = s1.nextInt();
+		
+		System.out.println("Enter the Detailed Description of the crime (maximum 150 words");
+		s1.nextLine();
+		String des = s1.nextLine();
+		
+		
+		System.out.println("Enter the date of crime (formate must be -> yyyy-mm-dd");
+		String dateS = s1.next();
+		SimpleDateFormat sdf = new SimpleDateFormat("YYYY-MM-DD");
+		Date ld = null;
+		try {
+			ld = sdf.parse(dateS);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			System.out.println(e.getMessage());
+		}
+		String date = ld.toString();
+		
+		
+		
+		System.out.println("Enter the Name of the police Station");
+		s1.nextLine();
+		String police = s1.nextLine();
+		
+		
+		System.out.println("Enter the name of the Main suspected");
+		String sus = s1.nextLine();
+		
+
+		
+		System.out.println("what is the Status of this case ? Solved/Unsolved");
+		String status = s1.next();
+		
+		Crime c = new Crime(name,vict,des,date,police,sus,status);
+		
+		System.out.println(c);
+		
+		
+	}
+	
+}
