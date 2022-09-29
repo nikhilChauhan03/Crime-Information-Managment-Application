@@ -1,0 +1,5 @@
+package com.masai.CriminalDao;
+
+public class CriminalDaoImpl {
+
+}

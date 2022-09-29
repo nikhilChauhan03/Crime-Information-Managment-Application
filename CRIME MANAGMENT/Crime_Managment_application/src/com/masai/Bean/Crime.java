@@ -4,7 +4,7 @@ package com.masai.Bean;
 
 public class Crime {
 
-	
+	private int id;
 	private String name;
 	private int victims;
 	private String details;
@@ -15,7 +15,6 @@ public class Crime {
 	
 //---------------------------------	constructor using fields---------------------------
 	public Crime( String name, int victims, String details, String date, String police, String suspected,String status) {
-		super();
 		
 		this.name = name;
 		this.victims = victims;
@@ -24,6 +23,24 @@ public class Crime {
 		this.police = police;
 		this.suspected = suspected;
 		this.status = status;
+	}
+	
+	public Crime(int id, String name, int victims, String details, String date, String police, String suspected,String status) {
+		this.id = id;
+		this.name = name;
+		this.victims = victims;
+		this.details = details;
+		this.date = date;
+		this.police = police;
+		this.suspected = suspected;
+		this.status = status;
+	}
+	
+
+
+	public Crime()
+	{
+		
 	}
 	
 
@@ -38,7 +55,13 @@ public class Crime {
 	
 //	-------------------------------------------getters and setters ------------------------------------
 
+	public int getId() {
+		return id;
+	}
 
+	public void setId(int id) {
+		this.id = id;
+	}
 
 	public String getName() {
 		return name;

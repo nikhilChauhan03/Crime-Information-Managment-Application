@@ -1,0 +1,37 @@
+package com.masai.CriminalUseCase;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+
+import com.masai.Bean.Criminal;
+import com.masai.CriminalDao.CriminalDao;
+import com.masai.utility.DB_Connection;
+
+public class CriminalRegister implements CriminalDao{
+
+	@Override
+	public String addCriminalDetails(Criminal c) {
+		String message = "Failed to insert criminal record";
+		
+		try(Connection con = DB_Connection.getconnection())
+		{
+			PreparedStatement ps = con.prepareStatement(" insert into criminal (name,Address,gender,age,identity_mark,crime,area) values(?,?,?,?,?,?,?);","root","N20y2m250x@");
+			ps.setString(1, c.getName());
+			
+			
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			message = e.getMessage();
+		}
+		
+		
+		
+		
+		return message;
+		
+	}
+
+}

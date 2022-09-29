@@ -1,0 +1,31 @@
+import java.util.List;
+
+import com.masai.Bean.Crime;
+import com.masai.CrimeDao.CrimeDao;
+import com.masai.CrimeDao.CrimeDaoImpl;
+import com.masai.Exceptions.CrimeException;
+
+public class getListOfAllCrimes {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		
+		CrimeDao cd = new CrimeDaoImpl();
+		try {
+			
+			List<Crime> list = cd.getAllCrimes();
+			
+			for(Crime c:list)
+			{
+				System.out.println(c);
+			}
+			
+			
+		} catch (CrimeException e) {
+			// TODO Auto-generated catch block
+			System.out.println(e.getMessage());
+		}
+		
+	}
+
+}

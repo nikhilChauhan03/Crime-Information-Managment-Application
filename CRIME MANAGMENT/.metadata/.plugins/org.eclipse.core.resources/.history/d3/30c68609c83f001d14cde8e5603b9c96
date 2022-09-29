@@ -1,0 +1,43 @@
+package com.masai.crimeByCriminalDao;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+
+import com.masai.utility.DB_Connection;
+
+public class CrimeByCriminalDaoImpl implements CrimeByCriminalDao{
+
+	@Override
+	public String registerCriminalToCrime(int crime_id, int criminal_id) {
+		
+//		---------------------------------Initiating the String------------------------------------------------
+		
+		String message = "failed to map criminal to crime";
+		
+//		---------------------------------Getting the Database connection--------------------------------------
+		
+		try(Connection con = DB_Connection.getconnection())
+		{
+			
+			PreparedStatement ps = con.prepareStatement("insert into crime_by_criminal (crime_id,criminal_id) values(?,?);");
+			
+			ps.setInt(1, crime_id);
+			ps.setInt(2, criminal_id);
+			
+			int insert = ps.executeUpdate();
+			
+			if(insert > 0)
+			{
+				message = "Criminal is successfully mapped to crime_id " + crime_id ;
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			message = e.getMessage();
+		}
+		
+		return message;
+	}
+
+}

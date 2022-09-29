@@ -1,0 +1,122 @@
+package com.masai.CriminalDao;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
+import com.masai.Bean.Crime;
+import com.masai.Bean.Criminal;
+import com.masai.Exceptions.CrimeException;
+import com.masai.Exceptions.CriminalException;
+import com.masai.utility.DB_Connection;
+
+public class CriminalDaoImpl implements CriminalDao{
+
+	@Override
+	public String addCriminalDetails(Criminal c) {
+		
+//		------------------------------------------taking string to return------------------------------------------------
+		
+		String message = "Failed to insert criminal record";
+		
+//		------------------------------------------getting the connection form DB-----------------------------------------
+		
+		try(Connection con = DB_Connection.getconnection())
+		
+//		------------------------------------------inserting the sql query to to i insert the values-----------------------
+		
+		{
+			PreparedStatement ps = con.prepareStatement(" insert into criminal (name,Address,gender,age,identity_mark,crime,area) values(?,?,?,?,?,?,?);");
+			ps.setString(1, c.getName());
+			ps.setString(2, c.getAddress());
+			ps.setString(3, c.getGender());
+			ps.setInt(4, c.getAge());
+			ps.setString(5, c.getIdentity_mark());
+			ps.setString(6, c.getCrime());
+			ps.setString(7, c.getArea());
+			
+			int insert = ps.executeUpdate();
+			if(insert > 0)
+			{
+				
+				message = "criminal record inserted succesfully";
+				
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			message = e.getMessage();
+		}
+		
+		
+		
+		
+		return message;
+	}
+
+	@Override
+	public List<Criminal> getAllCriminals() throws CriminalException {
+//		------------Initializing List----------------------
+		
+		List<Criminal> list = new ArrayList<>();
+		
+//		------------connection to the data base----------------
+		
+		try(Connection con = DB_Connection.getconnection())
+		{
+			PreparedStatement ps = con.prepareStatement("select * from Criminal;");
+			
+			ResultSet rs = ps.executeQuery();
+			
+			while(rs.next())
+			{
+				
+				int id = rs.getInt("Criminal_id");
+				String name = rs.getString("Name");
+				int age = rs.getInt("age");
+				String gender = rs.getString("gender");
+				String add = rs.getString("Address");
+				String mark = rs.getString("Identity_mark");
+				String crime = rs.getString("crime");
+				String area = rs.getString("area");
+				
+//				---------creating crime object and add it to list--------------
+				
+				Criminal c = new Criminal(id, name, add, age, gender, mark, crime, area);
+				list.add(c);
+				
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			throw new CriminalException(e.getMessage());
+		}
+		
+//		----------------check if list is empty then throw exception---------------
+		
+		if(list.isEmpty())
+		{
+			throw new CriminalException();
+		}
+		
+		
+		return list;
+	}
+
+	@Override
+	public String deleteCriminalDetails(int id) throws CriminalException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String deleteIvalidDetails(int id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	
+}

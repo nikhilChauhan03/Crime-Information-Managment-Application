@@ -2,13 +2,10 @@
 <qualifiedTypeNameHistroy>
     <fullyQualifiedTypeName name="java.sql.DriverManager"/>
     <fullyQualifiedTypeName name="java.sql.SQLException"/>
-    <fullyQualifiedTypeName name="com.masai.utility.DB_Connection"/>
     <fullyQualifiedTypeName name="java.sql.Connection"/>
     <fullyQualifiedTypeName name="com.mysql.cj.PreparedQuery"/>
-    <fullyQualifiedTypeName name="java.sql.PreparedStatement"/>
     <fullyQualifiedTypeName name="com.masai.CrimeDao.Crimes"/>
     <fullyQualifiedTypeName name="com.masai.Bean.Crime"/>
-    <fullyQualifiedTypeName name="java.util.Scanner"/>
     <fullyQualifiedTypeName name="java.util.Date"/>
     <fullyQualifiedTypeName name="java.sql.Date"/>
     <fullyQualifiedTypeName name="java.sql.SQLDataException"/>
@@ -16,6 +13,14 @@
     <fullyQualifiedTypeName name="java.time.format.DateTimeFormatter"/>
     <fullyQualifiedTypeName name="java.time.LocalDate"/>
     <fullyQualifiedTypeName name="com.masai.CrimeDao.CrimesDao"/>
-    <fullyQualifiedTypeName name="com.masai.CrimeDao.CrimeDaoImpl"/>
     <fullyQualifiedTypeName name="com.masai.Exceptions.CrimeException"/>
+    <fullyQualifiedTypeName name="java.util.Scanner"/>
+    <fullyQualifiedTypeName name="com.masai.CrimeDao.CrimeDaoImpl"/>
+    <fullyQualifiedTypeName name="com.masai.CrimeDao.CrimeDao"/>
+    <fullyQualifiedTypeName name="com.masai.utility.DB_Connection"/>
+    <fullyQualifiedTypeName name="java.sql.PreparedStatement"/>
+    <fullyQualifiedTypeName name="com.masai.Bean.Criminal"/>
+    <fullyQualifiedTypeName name="com.masai.Exceptions.CriminalException"/>
+    <fullyQualifiedTypeName name="com.masai.CriminalDao.CriminalDao"/>
+    <fullyQualifiedTypeName name="com.masai.CriminalDao.CriminalDaoImpl"/>
 </qualifiedTypeNameHistroy>

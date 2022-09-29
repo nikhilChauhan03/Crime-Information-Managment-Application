@@ -1,0 +1,17 @@
+package com.masai.crimeUseCase;
+
+import java.util.Scanner;
+
+import com.masai.CrimeDao.CrimeDao;
+import com.masai.CrimeDao.CrimeDaoImpl;
+import com.masai.Exceptions.CrimeException;
+
+public class DeleteCrimeDetails {
+
+	public static void main(String[] args) {
+s
+		
+
+	}
+
+}

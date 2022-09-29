@@ -1,0 +1,13 @@
+package com.masai.CrimeDao;
+
+import java.util.List;
+
+import com.masai.Bean.Crime;
+import com.masai.Exceptions.CrimeException;
+
+public interface CrimeDao {
+
+	String AddCrimeDetails(Crime c);
+	List<Crime> getAllCrimes() throws CrimeException;
+	
+}

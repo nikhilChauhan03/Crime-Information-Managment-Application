@@ -1,0 +1,52 @@
+package com.masai.CriminalUseCase;
+
+import java.util.Scanner;
+
+import com.masai.Bean.Criminal;
+
+public class CriminalRegister {
+
+public static void main(String[] args)
+{
+	
+//	------------------------------------scanner class to taking input from the admin---------------------------------
+	
+	Scanner s1 = new Scanner(System.in);
+	System.out.println("Enter the Ciminal Name");
+	s1.nextLine();
+	String name = s1.nextLine();
+	
+	
+	System.out.println("Enter the Address Of Criminal");
+
+	String Address = s1.nextLine();
+	
+	System.out.println("Enter the Gender : Male / Female");
+	s1.nextLine();
+	String gender = s1.nextLine();
+	
+	System.out.println("Enter the Age");
+	s1.nextLine();
+	int age = s1.nextInt();
+	
+	System.out.println("Enter Any identity mark");
+	s1.nextLine();
+	String mark = s1.nextLine();
+	
+	System.out.println("What is Crime he/she does");
+	s1.nextLine();
+	String crime = s1.nextLine();
+	
+	System.out.println("In which area he/she did crime");
+	s1.nextLine();
+	String area = s1.nextLine();
+	
+//	-------------------------------------creating object of criminal class---------------------------------------------
+	
+	Criminal c = new Criminal(name,Address,age,gender,mark,crime,area);
+	System.out.println(c);
+	
+}
+	
+
+}
