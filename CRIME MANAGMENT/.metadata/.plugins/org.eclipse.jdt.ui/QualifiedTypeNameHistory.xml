@@ -13,14 +13,17 @@
     <fullyQualifiedTypeName name="java.time.format.DateTimeFormatter"/>
     <fullyQualifiedTypeName name="java.time.LocalDate"/>
     <fullyQualifiedTypeName name="com.masai.CrimeDao.CrimesDao"/>
-    <fullyQualifiedTypeName name="com.masai.Exceptions.CrimeException"/>
-    <fullyQualifiedTypeName name="java.util.Scanner"/>
     <fullyQualifiedTypeName name="com.masai.CrimeDao.CrimeDaoImpl"/>
     <fullyQualifiedTypeName name="com.masai.CrimeDao.CrimeDao"/>
+    <fullyQualifiedTypeName name="com.masai.crimeByCriminalDao.CrimeByCriminalDaoImpl"/>
+    <fullyQualifiedTypeName name="com.masai.crimeByCriminalDao.CrimeByCriminalDao"/>
     <fullyQualifiedTypeName name="com.masai.utility.DB_Connection"/>
     <fullyQualifiedTypeName name="java.sql.PreparedStatement"/>
-    <fullyQualifiedTypeName name="com.masai.Bean.Criminal"/>
+    <fullyQualifiedTypeName name="java.util.Scanner"/>
+    <fullyQualifiedTypeName name="java.util.InputMismatchException"/>
+    <fullyQualifiedTypeName name="com.masai.Exceptions.CrimeException"/>
     <fullyQualifiedTypeName name="com.masai.Exceptions.CriminalException"/>
     <fullyQualifiedTypeName name="com.masai.CriminalDao.CriminalDao"/>
     <fullyQualifiedTypeName name="com.masai.CriminalDao.CriminalDaoImpl"/>
+    <fullyQualifiedTypeName name="com.masai.Bean.Criminal"/>
 </qualifiedTypeNameHistroy>

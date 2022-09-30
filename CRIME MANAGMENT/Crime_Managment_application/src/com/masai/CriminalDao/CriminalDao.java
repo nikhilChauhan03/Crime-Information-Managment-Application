@@ -2,7 +2,9 @@ package com.masai.CriminalDao;
 
 import java.util.List;
 
+import com.masai.Bean.Crime;
 import com.masai.Bean.Criminal;
+import com.masai.Exceptions.CrimeException;
 import com.masai.Exceptions.CriminalException;
 
 public interface CriminalDao {
@@ -22,6 +24,15 @@ public interface CriminalDao {
 //  ----------------------- Delete criminal details based on criminal_id from criminal table ------------------------------
 	
 	String deleteIvalidDetails(int id);
+	
+//	--------------------------------------------search Criminals by name-----------------------------------------------------
+	
+	List<Criminal> searchByName(String s) throws CriminalException;
+	
+//	--------------------------------------------search criminal by ID--------------------------------------------------------
+	
+	Criminal searchByID(int id) throws CriminalException;
+	
 	
 	
 }

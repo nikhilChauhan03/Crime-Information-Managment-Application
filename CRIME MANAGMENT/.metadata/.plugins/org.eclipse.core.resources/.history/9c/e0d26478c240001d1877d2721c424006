@@ -1,0 +1,11 @@
+package com.masai.Bean;
+
+public class CrimeByCriminal {
+
+	private int case_id;
+	private int criminal_id;
+	private String crime_name;
+	
+	
+	
+}

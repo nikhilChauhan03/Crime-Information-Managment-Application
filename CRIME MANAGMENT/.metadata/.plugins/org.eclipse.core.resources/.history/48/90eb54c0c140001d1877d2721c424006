@@ -1,0 +1,89 @@
+package com.masai.crimeByCriminalDao;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+import com.masai.utility.DB_Connection;
+import com.masai.Exceptions.CrimeException;
+import com.masai.Exceptions.CriminalException;
+
+public class CrimeByCriminalDaoImpl implements CrimeByCriminalDao{
+
+	@Override
+	public String registerCriminalToCrime(int crime_id, int criminal_id) throws CriminalException, CrimeException {
+		
+//		---------------------------------Initiating the String------------------------------------------------
+		
+		String message = "failed to map criminal to crime";
+		
+//		---------------------------------Getting the Database connection--------------------------------------
+		
+		try(Connection con = DB_Connection.getconnection())
+		{
+			
+//		--------------------------------- checking that is crime_id is valid or not ? -----------------------
+			
+			PreparedStatement ps1 = con.prepareStatement("select * from crime where crime_id = ?;");
+			ps1.setInt(1, crime_id);
+			
+			ResultSet rs1 = ps1.executeQuery();
+			
+			if(rs1.next())
+			{
+				
+//		-----------------------------------now if crime_id is valid check again for the  criminal Id--------------
+				
+				PreparedStatement ps2 = con.prepareStatement("Select * from criminal where criminal_id = ?;");
+				ps2.setInt(1, criminal_id);
+				ResultSet rs2 = ps2.executeQuery();
+				
+				if(rs2.next())
+				{
+					
+//					-----------------------------------now if crime_id and criminal Id id valid add them into DB--------------
+					
+					PreparedStatement ps3 = con.prepareStatement("insert into crime_by_criminal (crime_id,criminal_id) values(?,?);");
+					
+					ps3.setInt(1, crime_id);
+					ps3.setInt(2, criminal_id);
+					
+					int insert = ps3.executeUpdate();
+					
+					if(insert > 0)
+					{
+						message = "Criminal_id " + criminal_id +  " is successfully mapped to crime_id " + crime_id ;
+					}
+					
+				}
+//		 		----------------------------------if criminal_id is not valid throw criminalException---------------------------
+				else
+				{
+					throw new CriminalException("Invalid Criminal_id");
+				}
+				
+			}
+// 		----------------------------------if crime_id is not valid throw crimeException---------------------------
+			else
+			{
+				
+				throw new CrimeException("Invalid Crime_id");
+				
+			}
+			
+			
+			
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			message = e.getMessage();
+		}
+		
+		return message;
+	}
+
+}
+
+

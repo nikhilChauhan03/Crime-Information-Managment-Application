@@ -233,6 +233,111 @@ public class CriminalDaoImpl implements CriminalDao{
 		
 	}
 
+	
+//--------------------------------------------------Searching Criminals by their name-------------------------------------------------------
+	
+	
+	@Override
+	public List<Criminal> searchByName(String s) throws CriminalException {
+		
+//		----------------Initializing the list to return------------------
+		
+		List<Criminal> list = new ArrayList<>();
+		
+//		----------------establishing the connection--------------------
+		
+		try(Connection con = DB_Connection.getconnection())
+		{
+			PreparedStatement ps = con.prepareStatement("Select * from criminal where name = ?;");
+			ps.setString(1, s);
+			
+			ResultSet rs = ps.executeQuery();
+			
+			while(rs.next())
+			{
+				
+				int id = rs.getInt("Criminal_id");
+				String name = rs.getString("Name");
+				int age = rs.getInt("age");
+				String gender = rs.getString("gender");
+				String add = rs.getString("Address");
+				String mark = rs.getString("Identity_mark");
+				String crime = rs.getString("crime");
+				String area = rs.getString("area");
+				
+//				---------creating crime object and add it to list--------------
+				
+				Criminal c = new Criminal(id, name, add, age, gender, mark, crime, area);
+				list.add(c);
+				
+			}
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			throw new CriminalException(e.getMessage());
+		}
+		
+//		--------------------if list is empty then throw an exception--------------------
+		
+		if(list.isEmpty())
+		{
+			throw new CriminalException(s + " is not found in Database");
+		}
+		
+		return list;
+		
+		
+	}
+
+	
+//------------------------------------------------Serach Criminal Details by Criminal_id----------------------------------------------------
+	
+	@Override
+	public Criminal searchByID(int id) throws CriminalException {
+		
+		Criminal c = null;
+		
+//		---------------establishing the database connection------------------
+		
+		try(Connection con = DB_Connection.getconnection())
+		{
+			PreparedStatement ps = con.prepareStatement("Select * from criminal where criminal_id = ?;");
+			ps.setInt(1, id);
+			
+			ResultSet rs = ps.executeQuery();
+			
+			if(rs.next())
+			{
+				
+				int Cid = rs.getInt("Criminal_id");
+				String name = rs.getString("Name");
+				int age = rs.getInt("age");
+				String gender = rs.getString("gender");
+				String add = rs.getString("Address");
+				String mark = rs.getString("Identity_mark");
+				String crime = rs.getString("crime");
+				String area = rs.getString("area");
+				
+//				---------creating crime object and add it to list--------------
+				
+				 c = new Criminal(Cid, name, add, age, gender, mark, crime, area);
+			}
+			else
+			{
+				throw new CriminalException(id + " id Invalid Crime id ");
+			}
+				
+
+			
+		} catch (SQLException e) {
+			throw new CriminalException(e.getMessage());
+		}
+		
+		return c;
+		
+	}
+
 }
 
 
