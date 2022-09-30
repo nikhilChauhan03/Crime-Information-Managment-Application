@@ -233,6 +233,413 @@ public String deleteIvalidDetails(int id) {
 	
 }
 
+
+//-----------------------------------------------Search Crime by Crime_id-------------------------------------------------------------------
+
+
+@Override
+public Crime searchByID(int id) throws CrimeException {
+	
+	Crime c = null;
+	
+//	---------------establishing the database connection------------------
+	
+	try(Connection con = DB_Connection.getconnection())
+	{
+		PreparedStatement ps = con.prepareStatement("Select * from crime where crime_id = ?;");
+		ps.setInt(1, id);
+		
+		ResultSet rs = ps.executeQuery();
+		
+		if(rs.next())
+		{
+			
+			int crimeId = rs.getInt("Crime_id");
+			String name = rs.getString("Name_of_crime");
+			int vic = rs.getInt("victims");
+			String des = rs.getString("detailed_des");
+			String date = rs.getString("date");
+			String police = rs.getString("police_station_name");
+			String sus = rs.getString("Suspected");
+			String status = rs.getString("Status");
+			
+			 c = new Crime(crimeId,name,vic,des,date,police,sus,status);
+		}
+		else
+		{
+			throw new CrimeException(id + " id Invalid Crime id ");
+		}
+			
+
+		
+	} catch (SQLException e) {
+		throw new CrimeException(e.getMessage());
+	}
+	
+	return c;
+	
+}
+
+
+
+//--------------------------------------------------Search Crimes by crime name-------------------------------------------------------------
+
+@Override
+public List<Crime> searchByName(String s) throws CrimeException
+{
+//	----------------Initializing the list to return------------------
+	
+	List<Crime> list = new ArrayList<>();
+	
+//	----------------establishing the connection--------------------
+	
+	try(Connection con = DB_Connection.getconnection())
+	{
+		PreparedStatement ps = con.prepareStatement("Select * from crime where name_of_crime = ?;");
+		ps.setString(1, s);
+		
+		ResultSet rs = ps.executeQuery();
+		
+		while(rs.next())
+		{
+			
+			int id = rs.getInt("Crime_id");
+			String name = rs.getString("Name_of_crime");
+			int vic = rs.getInt("victims");
+			String des = rs.getString("detailed_des");
+			String date = rs.getString("date");
+			String police = rs.getString("police_station_name");
+			String sus = rs.getString("Suspected");
+			String status = rs.getString("Status");
+			
+//			---------creating crime object and add it to list--------------
+			
+			Crime c = new Crime(id,name,vic,des,date,police,sus,status);
+			list.add(c);
+			
+		}
+		
+		
+	} catch (SQLException e) {
+		// TODO Auto-generated catch block
+		throw new CrimeException(e.getMessage());
+	}
+	
+//	--------------------if list is empty then throw an exception--------------------
+	
+	if(list.isEmpty())
+	{
+		throw new CrimeException(s + " is not found in Database");
+	}
+	
+	return list;
+	
+}
+
+
+//----------------------------------------------update the status of particular case--------------------------------------------------------
+
+
+@Override
+public String updateStatusOfCase (int crime_id, String value) throws CrimeException {
+	
+	String message = "failed to update the Case";
+	
+//	----------------establishing the connection--------------------
+//	---> checking that crime_id is valid or not;
+	
+	try(Connection con = DB_Connection.getconnection())
+	{
+		PreparedStatement ps = con.prepareStatement("Select ? from crime;");
+		ps.setInt(1, crime_id);
+		ResultSet rs = ps.executeQuery();
+
+//		---> if crime_id is valid then update the status of crime table:
+		
+		if(rs.next())
+		{
+			try {
+				
+			PreparedStatement ps2 = con.prepareStatement("update crime set status = ? where crime_id = ?;");
+			ps2.setString(1, value);
+			ps2.setInt(2, crime_id);
+			int status = ps2.executeUpdate();
+			
+			if(status > 0)
+			{	
+				message = "Status of Crime with Crime id " + crime_id + " is updated";	
+			}
+			
+			}
+			catch (Exception e) {
+				throw new CrimeException(e.getMessage());
+			}
+
+		}
+		
+	} catch (SQLException e) {
+
+		throw new CrimeException(e.getMessage());
+		
+	}
+		
+	return message;
+	
+}
+
+
+//	---------------------------------------------Checking the current status of Case--------------------------------------------------------
+
+
+	public String checkStatus(int crime_id) throws CrimeException
+	{
+		
+//		--------------Initializing the String to return----------------
+		
+		String message = "Invalid crime Id";
+		
+//		----------------establishing the connection--------------------
+		
+		try(Connection con = DB_Connection.getconnection())
+		{
+			PreparedStatement ps = con.prepareStatement("select status from crime where crime_id = ?;");
+			ps.setInt(1, crime_id);
+			
+			ResultSet rs = ps.executeQuery();
+			
+			if(rs.next())
+			{
+				message = "current status of crime_id " + crime_id + " is " +  rs.getString("status");
+				
+			}
+			else
+			{
+				throw new CrimeException(crime_id + " is Invalid Crime Id");
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			throw new CrimeException(e.getMessage());
+		}
+			
+		return message;
+		
+	}
+
+
+//	--------------------------------------------------Number of Cases in current month------------------------------------------------------
+
+	@Override
+	public String countNumberOfCasesInCurrentMonth() {
+		
+//		--------------Initializing the String to return----------------
+		
+		String message = "There is no case registered in current month";
+		
+//		----------------establishing the connection--------------------
+		
+		try(Connection con = DB_Connection.getconnection())
+		{
+			PreparedStatement ps = con.prepareStatement("select count(date) from crime where month(date) = month(current_date) and year(date) = year(current_date);");
+			ResultSet rs = ps.executeQuery();
+			
+			if(rs.next())
+			{
+				int count = rs.getInt("count(date)");
+				message = "Total Number of cases in current month is : " + count;
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			message = e.getMessage();
+		}
+		
+		return message;
+		
+	}
+	
+	
+//------------------------------------------------checking the number of solved cases-------------------------------------------------------
+
+	
+	@Override
+	public String numberOfSolvedCases()
+	{		
+//		--------------Initializing the String to return----------------
+		
+		String message = "There is no solved cases in entire Data base";
+		
+//		----------------establishing the connection--------------------
+		
+		try(Connection con = DB_Connection.getconnection())
+		{
+			PreparedStatement ps = con.prepareStatement("select count(status) from crime where status = ?;");
+			ps.setString(1, "solved");
+			ResultSet rs = ps.executeQuery();
+			
+			if(rs.next())
+			{
+				int count = rs.getInt("count(status)");
+				message = "Total Number of Solved cases : " + count;
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			message = e.getMessage();
+		}
+		
+		return message;
+		
+	}
+	
+	
+//----------------------------------------------checking the number of unsolved cases-------------------------------------------------------
+
+	
+	@Override
+	public String numberOfUnsolvedCases()
+	{		
+//		--------------Initializing the String to return----------------
+		
+		String message = "There is no any Unsolved case ";
+		
+//		----------------establishing the connection--------------------
+		
+		try(Connection con = DB_Connection.getconnection())
+		{
+			PreparedStatement ps = con.prepareStatement("select count(status) from crime where status = ?;");
+			ps.setString(1, "unsolved");
+			ResultSet rs = ps.executeQuery();
+			
+			if(rs.next())
+			{
+				int count = rs.getInt("count(status)");
+				message = "Total Number of unsolved cases : " + count;
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			message = e.getMessage();
+		}
+		
+		return message;
+	
+	}
+	
+	
+	
+//---------------------------------------------get the details of all solved cases----------------------------------------------------------
+
+	
+	
+	@Override
+	public List<Crime> detailsOfSolvedCases() throws CrimeException
+	{
+		
+//		----------Initiating the list to return it---------------
+		
+		List<Crime> list = new ArrayList<>();
+		
+//		----------------establishing the connection--------------------
+		
+		try(Connection con = DB_Connection.getconnection())
+		{
+			PreparedStatement ps = con.prepareStatement("select * from crime where status = ?;");
+			ps.setString(1, "solved");
+			
+			ResultSet rs = ps.executeQuery();
+			
+			while(rs.next())
+			{
+				
+				int id = rs.getInt("Crime_id");
+				String name = rs.getString("Name_of_crime");
+				int vic = rs.getInt("victims");
+				String des = rs.getString("detailed_des");
+				String date = rs.getString("date");
+				String police = rs.getString("police_station_name");
+				String sus = rs.getString("Suspected");
+				String status = rs.getString("Status");
+				
+//				---------creating crime object and add it to list--------------
+				
+				Crime c = new Crime(id,name,vic,des,date,police,sus,status);
+				list.add(c);
+			}
+			
+			
+		} catch (SQLException e) {
+			
+			throw new CrimeException(e.getMessage());
+			
+		}
+		
+		if(list.isEmpty())
+		{
+			throw new CrimeException("There is no solved Cases present into the Database");
+		}
+		
+		return list;
+		
+	}
+	
+	
+	
+	//---------------------------------------------get the details of all solved cases----------------------------------------------------------
+
+		
+		
+		@Override
+		public List<Crime> detailsOfUnsolvedCases() throws CrimeException
+		{
+			
+//			----------Initiating the list to return it---------------
+			
+			List<Crime> list = new ArrayList<>();
+			
+//			----------------establishing the connection--------------------
+			
+			try(Connection con = DB_Connection.getconnection())
+			{
+				PreparedStatement ps = con.prepareStatement("select * from crime where status = ?;");
+				ps.setString(1, "unsolved");
+				
+				ResultSet rs = ps.executeQuery();
+				
+				while(rs.next())
+				{
+					
+					int id = rs.getInt("Crime_id");
+					String name = rs.getString("Name_of_crime");
+					int vic = rs.getInt("victims");
+					String des = rs.getString("detailed_des");
+					String date = rs.getString("date");
+					String police = rs.getString("police_station_name");
+					String sus = rs.getString("Suspected");
+					String status = rs.getString("Status");
+					
+//					---------creating crime object and add it to list--------------
+					
+					Crime c = new Crime(id,name,vic,des,date,police,sus,status);
+					list.add(c);
+				}
+				
+				
+			} catch (SQLException e) {
+				
+				throw new CrimeException(e.getMessage());
+				
+			}
+			
+			if(list.isEmpty())
+			{
+				throw new CrimeException("There is no Unsolved Cases present into the Database");
+			}
+			
+			return list;
+			
+		}
+		
 }
 
 

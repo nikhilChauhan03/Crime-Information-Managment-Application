@@ -1,0 +1,23 @@
+package com.masai.crimeUseCase;
+
+import com.masai.CrimeDao.CrimeDao;
+import com.masai.CrimeDao.CrimeDaoImpl;
+import com.masai.Exceptions.CrimeException;
+
+public class Update {
+
+	public static void main(String[] args) {
+		
+		
+		CrimeDao cd = new CrimeDaoImpl();
+		try {
+			String s = cd.updateStatusOfCase(2,"Solved");
+			System.out.println(s);
+		} catch (CrimeException e) {
+			// TODO Auto-generated catch block
+			System.out.println(e.getMessage());
+		}
+		
+	}
+
+}s
