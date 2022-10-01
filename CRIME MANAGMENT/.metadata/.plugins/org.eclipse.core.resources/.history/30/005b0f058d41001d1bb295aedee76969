@@ -171,7 +171,7 @@ public class Features {
 				while(true)
 				{
 					System.out.println("");
-					System.out.println("Want further Querries ? ( Y / N )");
+					System.out.println("Want to further Querries ? ( Y / N )");
 					
 					String c = s1.next();
 					
