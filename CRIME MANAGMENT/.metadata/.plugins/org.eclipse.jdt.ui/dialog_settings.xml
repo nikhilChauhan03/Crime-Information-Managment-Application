@@ -86,8 +86,8 @@
 		<item key="height" value="400"/>
 	</section>
 	<section name="org.eclipse.ltk.ui.refactoring.settings">
-		<item key="updateSimilarElements" value="false"/>
-		<item key="updateSimilarElementsMatchStrategy" value="1"/>
+		<item key="updateSimilarElements" value="true"/>
+		<item key="updateSimilarElementsMatchStrategy" value="3"/>
 		<item key="updateTextualMatches" value="false"/>
 		<item key="updateQualifiedNames" value="false"/>
 		<item key="patterns" value="*"/>

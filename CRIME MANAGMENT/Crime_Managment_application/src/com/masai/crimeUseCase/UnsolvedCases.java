@@ -5,7 +5,8 @@ import com.masai.CrimeDao.CrimeDaoImpl;
 
 public class UnsolvedCases {
 
-	public static void main(String[] args) {
+	public void unsolvedCases()
+	{
 
 //		------------creating the object of the CrimeDao class to call a method--------------
 		
@@ -13,7 +14,10 @@ public class UnsolvedCases {
 		String s = cd.numberOfUnsolvedCases();
 		System.out.println(s);
 		
-
+	}
+	
+	public static void main(String[] args) {
+		new UnsolvedCases().unsolvedCases();
 	}
 
 }

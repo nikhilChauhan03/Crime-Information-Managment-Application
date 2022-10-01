@@ -12,8 +12,9 @@ import com.masai.CrimeDao.CrimeDao;
 
 
 public class RegisterCrime {
-
-	public static void main(String[] args)
+	
+	
+	public void registerCrime()
 	{
 //		------------------------Scanner class for taking input from user---------------------------------
 		Scanner s1 = new Scanner(System.in);
@@ -61,13 +62,11 @@ public class RegisterCrime {
 			System.out.println(e.getMessage());
 			System.out.println("Invalid format");
 		}
-//		Robbery happened at night in SBI bank. there were two people's fully loaded with weapons
-		
-		
-		
-		
-		
-		
+	}
+
+	public static void main(String[] args)
+	{		
+		new RegisterCrime().registerCrime();
 		
 	}
 	

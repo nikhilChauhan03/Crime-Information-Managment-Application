@@ -4,15 +4,22 @@ import com.masai.CrimeDao.CrimeDao;
 import com.masai.CrimeDao.CrimeDaoImpl;
 
 public class CasesInCurrentMonth {
-
-	public static void main(String[] args) {
-
+	
+	public void casesInCurrenMonth()
+	{
+	
 //		-----------------------------creating the object of CrimeDao class to call the method-------------------------------------------
 		
 		CrimeDao cd = new CrimeDaoImpl();
 		String count = cd.countNumberOfCasesInCurrentMonth();
-		System.out.println(count);
-	
+		System.out.println(count);	
+		
+	}
+
+	public static void main(String[] args) {
+
+		new CasesInCurrentMonth().casesInCurrenMonth();
+		
 	}
 
 }

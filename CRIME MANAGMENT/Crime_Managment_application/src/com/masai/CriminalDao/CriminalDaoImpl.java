@@ -146,19 +146,19 @@ public class CriminalDaoImpl implements CriminalDao{
 				{
 					message = "criminal details of criminal_id " + id + " deleted successfully";
 					
-					PreparedStatement ps3 = con.prepareStatement("alter table criminal auto_increment = ?;");
-					ps3.setInt(1, id);
-					
-					int statusAM = ps3.executeUpdate();
-					
-					if(statusAM >= 0)
-					{
-						System.out.println("AutoIncrement is modified");
-					}
-					else
-					{
-						System.out.println("AutoIncrement Modification failed");
-					}
+//					PreparedStatement ps3 = con.prepareStatement("alter table criminal auto_increment = ?;");
+//					ps3.setInt(1, id);
+//					
+//					int statusAM = ps3.executeUpdate();
+//					
+//					if(statusAM >= 0)
+//					{
+//						System.out.println("AutoIncrement is modified");
+//					}
+//					else
+//					{
+//						System.out.println("AutoIncrement Modification failed");
+//					}
 					
 				}
 		
@@ -206,19 +206,19 @@ public class CriminalDaoImpl implements CriminalDao{
 				
 				message = "Details of criminal id " + id + " is successfully deleted ";
 				
-				PreparedStatement ps3 = con.prepareStatement("alter table criminal auto_increment = ?;");
-				ps3.setInt(1, id);
-				
-				int statusAM = ps3.executeUpdate();
-				
-				if(statusAM >= 0)
-				{
-					System.out.println("AutoIncrement is modified");
-				}
-				else
-				{
-					System.out.println("AutoIncrement Modification failed");
-				}
+//				PreparedStatement ps3 = con.prepareStatement("alter table criminal auto_increment = ?;");
+//				ps3.setInt(1, id);
+//				
+//				int statusAM = ps3.executeUpdate();
+//				
+//				if(statusAM >= 0)
+//				{
+//					System.out.println("AutoIncrement is modified");
+//				}
+//				else
+//				{
+//					System.out.println("AutoIncrement Modification failed");
+//				}
 				
 			}
 			

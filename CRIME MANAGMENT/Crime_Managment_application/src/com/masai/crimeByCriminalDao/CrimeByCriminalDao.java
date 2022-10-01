@@ -15,7 +15,7 @@ public interface CrimeByCriminalDao {
 	
 //	------------------------------------show details of particular case-----------------------------------
 	
-	void searchCrimeByCriminal(int crime_id, int criminal_id) throws CrimeException,CriminalException;
+	void searchCrimeByCriminal(int criminal_id) throws CrimeException,CriminalException;
 	
 //	-------------------------------------Delete detaisl of case-------------------------------------------
 	

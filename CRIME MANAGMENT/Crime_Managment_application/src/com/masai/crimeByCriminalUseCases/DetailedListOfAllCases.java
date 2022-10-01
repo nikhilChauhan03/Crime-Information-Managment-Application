@@ -5,13 +5,23 @@ import com.masai.crimeByCriminalDao.CrimeByCriminalDaoImpl;
 
 public class DetailedListOfAllCases {
 
-	public static void main(String[] args) {
+	
+	public void detailedListOfAllCases()
+	{
 		
 //		----------------------creating the object of crimebycriminal class to call method----------------------------------
+		
 		
 		CrimeByCriminalDao ccd = new CrimeByCriminalDaoImpl();
 		
 		ccd.showListOfAllCases();
+		
+	}
+	
+	
+	public static void main(String[] args) {
+
+		new DetailedListOfAllCases().detailedListOfAllCases();
 		
 	}
 

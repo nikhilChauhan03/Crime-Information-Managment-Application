@@ -1,0 +1,15 @@
+package com.masai.aStartApplication;
+
+public class StartApplication {
+
+	public static void main(String[] args)
+	{
+		
+		System.out.println("Welcome to Crime Managment System");
+		
+		
+		
+	}
+	
+	
+}

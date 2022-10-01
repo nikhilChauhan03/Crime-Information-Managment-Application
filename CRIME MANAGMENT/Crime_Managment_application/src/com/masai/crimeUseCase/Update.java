@@ -7,62 +7,71 @@ import com.masai.CrimeDao.CrimeDaoImpl;
 import com.masai.Exceptions.CrimeException;
 
 public class Update {
+	
+	
+	public void update()
+	{
+		
+		
+//		---------------------------Initiating the Scanner class --------------------------------
+			
+		Scanner s1 = new Scanner(System.in);
+		
+		System.out.println("Enter the valid Crime Id");
+		int id = s1.nextInt();
 
-	public static void main(String[] args) {
+//		---------------------creating the object of crimeDao class to call methods-----------------------------
+//		----> checking the current status of the case
 		
-//	---------------------------Initiating the Scanner class --------------------------------
+		CrimeDao cd = new CrimeDaoImpl();
 		
-	Scanner s1 = new Scanner(System.in);
-	
-	System.out.println("Enter the valid Crime Id");
-	int id = s1.nextInt();
-
-//	---------------------creating the object of crimeDao class to call methods-----------------------------
-//	----> checking the current status of the case
-	
-	CrimeDao cd = new CrimeDaoImpl();
-	
-	try {
-		
-		String current_status = cd.checkStatus(id);
-		System.out.println(current_status);
-		
-//	---------------------Again taking the input from user to update the status---------------------------	
-		
-		System.out.println("Want to update the status ? Y / N");
-		String choice = s1.next();
-		
-		try
-		{
-			if(choice.equalsIgnoreCase("y"))
+		try {
+			
+			String current_status = cd.checkStatus(id);
+			System.out.println(current_status);
+			
+//		---------------------Again taking the input from user to update the status---------------------------	
+			
+			System.out.println("Want to update the status ? Y / N");
+			String choice = s1.next();
+			
+			try
 			{
-				System.out.println("Enter the value : solved / unsolved");
-				String value = s1.next();
-				
-				String s = cd.updateStatusOfCase(id, value);
-				System.out.println(s);
-				
+				if(choice.equalsIgnoreCase("y"))
+				{
+					System.out.println("Enter the value : solved / unsolved");
+					String value = s1.next();
+					
+					String s = cd.updateStatusOfCase(id, value);
+					System.out.println(s);
+					
+				}
+				else if(choice.equalsIgnoreCase("n"))
+				{
+					System.out.println("Thankyou!!!");
+				}
+				else
+				{
+					throw new CrimeException("Invalid choice");
+				}
 			}
-			else if(choice.equalsIgnoreCase("n"))
+			catch(Exception e)
 			{
-				System.out.println("Thankyou!!!");
+				System.out.println(e.getMessage());
 			}
-			else
-			{
-				throw new CrimeException("Invalid choice");
-			}
-		}
-		catch(Exception e)
-		{
+			
+		} catch (CrimeException e) {
 			System.out.println(e.getMessage());
 		}
 		
-	} catch (CrimeException e) {
-		System.out.println(e.getMessage());
+		
+		
 	}
 	
-	
-		
+
+	public static void main(String[] args) {
+
+		new Update().update();
 		
 	}
 

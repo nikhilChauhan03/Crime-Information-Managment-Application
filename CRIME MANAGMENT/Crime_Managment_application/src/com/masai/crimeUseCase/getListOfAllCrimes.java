@@ -6,10 +6,11 @@ import com.masai.CrimeDao.CrimeDao;
 import com.masai.CrimeDao.CrimeDaoImpl;
 import com.masai.Exceptions.CrimeException;
 
-public class getListOfAllCrimes {
+public class GetListOfAllCrimes {
 
-	public static void main(String[] args) {
-
+	public void getListOfAllCrimes()
+	{
+		
 //		------------------------------- Creating CrimeDao object to call Method ---------------------------------
 		
 		CrimeDao cd = new CrimeDaoImpl();
@@ -41,6 +42,12 @@ public class getListOfAllCrimes {
 			// TODO Auto-generated catch block
 			System.out.println(e.getMessage());
 		}
+		
+	}
+	
+	public static void main(String[] args) {
+
+		new GetListOfAllCrimes().getListOfAllCrimes();
 		
 	}
 

@@ -8,7 +8,10 @@ import com.masai.Exceptions.CrimeException;
 
 public class DeleteCrimeDetails {
 
-	public static void main(String[] args) {
+	
+	public void deleteCrimeDetails()
+	{
+		
 //		------------------------ Scanner class to take crime_id from admin------------------------------
 		
 		Scanner s1 = new Scanner(System.in);
@@ -25,6 +28,13 @@ public class DeleteCrimeDetails {
 		} catch (CrimeException e) {
 			System.out.println(e.getMessage());
 		}
+		
+		
+	}
+	
+	public static void main(String[] args) {
+
+		new DeleteCrimeDetails().deleteCrimeDetails();
 		
 	}		
 

@@ -9,7 +9,7 @@ import com.masai.Exceptions.CrimeException;
 
 public class DetailsOfSolvedCases {
 
-	public static void main(String[] args)
+	public void detailsOfSolvedCases()
 	{
 		
 //		------------------------------- Creating CrimeDao object to call Method ---------------------------------
@@ -45,7 +45,13 @@ public class DetailsOfSolvedCases {
 		}
 		
 		
-		
+	}
+	
+	
+	public static void main(String[] args)
+	{
+
+		new DetailsOfSolvedCases().detailsOfSolvedCases();
 	}
 	
 }

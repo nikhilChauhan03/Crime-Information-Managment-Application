@@ -8,8 +8,9 @@ import com.masai.crimeByCriminalDao.CrimeByCriminalDao;
 import com.masai.crimeByCriminalDao.CrimeByCriminalDaoImpl;
 
 public class CriminalMap {
-
-	public static void main(String[] args) {
+	
+	public void registerCriminal()
+	{
 		
 //		-------------------------------------taking scanner class to take input from admin---------------------------------------
 		
@@ -38,5 +39,17 @@ public class CriminalMap {
 		
 		System.out.println(insert);
 	}
+		
+	
 
-}
+	public static void main(String[] args) {
+		
+		new CriminalMap().registerCriminal();
+		
+	}
+	
+	}
+		
+
+
+

@@ -1,0 +1,12 @@
+package com.masai.crimeUseCase;
+
+import java.util.Scanner;
+
+import com.masai.CrimeDao.CrimeDao;
+import com.masai.CrimeDao.CrimeDaoImpl;
+
+public class DeleteCriminalIvalidDetails {
+
+
+
+}

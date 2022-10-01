@@ -8,8 +8,8 @@ import com.masai.CrimeDao.CrimeDaoImpl;
 import com.masai.Exceptions.CrimeException;
 
 public class DetailsOfUnsolvedCases {
-
-	public static void main(String[] args)
+	
+	public void detailsOfUnsolvedCases()
 	{
 		
 //		------------------------------- Creating CrimeDao object to call Method ---------------------------------
@@ -44,7 +44,12 @@ public class DetailsOfUnsolvedCases {
 			System.out.println(e.getMessage());
 		}
 		
-		
+	}
+
+	public static void main(String[] args)
+	{
+
+		new DetailsOfSolvedCases().detailsOfSolvedCases();
 		
 	}
 	

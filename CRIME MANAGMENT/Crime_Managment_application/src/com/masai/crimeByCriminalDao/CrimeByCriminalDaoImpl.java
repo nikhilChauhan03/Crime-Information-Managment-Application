@@ -135,41 +135,36 @@ public class CrimeByCriminalDaoImpl implements CrimeByCriminalDao{
 	
 	
 	@Override
-	public void searchCrimeByCriminal(int crime_id, int criminal_id)throws CrimeException,CriminalException {
+	public void searchCrimeByCriminal(int criminal_id)throws CrimeException,CriminalException {
 		
 //		-----> establisgin the connection between data base ->
 		
 		try(Connection con = DB_Connection.getconnection())
 		{
-//			----> checking that crime_id is valid or not
-			PreparedStatement ps1 = con.prepareStatement("select case_id from crime_by_criminal where crime_id = ?;");
-			ps1.setInt(1, crime_id);
-			
-			ResultSet rs = ps1.executeQuery();
 			
 //			----> if crime_id is valid check for criminal_id
-			if(rs.next())
-			{
-				
+	
 				PreparedStatement ps2 = con.prepareStatement("select case_id from crime_by_criminal where criminal_id = ?;");
 				ps2.setInt(1, criminal_id);
 				
 				ResultSet rs2 = ps2.executeQuery();
 				
-//				-----> if both are id's are valid then get the details
+//				-----> if id is valid then get the details
 				if(rs2.next())
 				{
 					
-					PreparedStatement ps3 = con.prepareStatement("select t.case_id, t.criminal_id, c.name,c.address, c.crime, t.crime_id,x.victims,x.date, x.detailed_des,x.status from crime x inner join criminal c inner join crime_by_criminal t on x.crime_id = ? and c.criminal_id = ? and t.crime_id = ? and t.criminal_id = ?;");
-					ps3.setInt(1, crime_id);
+					PreparedStatement ps3 = con.prepareStatement("select t.case_id, t.criminal_id, c.name,c.address, c.crime, t.crime_id,x.victims,x.date, x.detailed_des,x.status from crime x inner join criminal c inner join crime_by_criminal t on c.criminal_id = ? and t.criminal_id = ? and t.crime_id = x.crime_id;");
+					ps3.setInt(1, criminal_id);
 					ps3.setInt(2, criminal_id);
-					ps3.setInt(3, crime_id);
-					ps3.setInt(4, criminal_id);
 					
 					ResultSet rs3 = ps3.executeQuery();
 					
-					if(rs3.next())
+					Boolean flag = false;
+					
+					while(rs3.next())
 					{
+						flag = true;
+						System.out.println();
 						
 						System.out.println( "Case id : " + rs3.getInt("case_id"));
 						System.out.println( "Criminal id : " + rs3.getInt("criminal_id"));
@@ -183,12 +178,14 @@ public class CrimeByCriminalDaoImpl implements CrimeByCriminalDao{
 						System.out.println( "Status of the case : " + rs3.getString("status"));
 						System.out.println();
 						
+						System.out.println("*******************************************************************************************************************");
+						
 						
 					}
-					else
+					if(flag == false)
 					{
 						
-						throw new CrimeException("crime id " + crime_id + " is not mapped with criminal_id " + criminal_id);
+						throw new CrimeException("Criminal Details with crminal id " + criminal_id + " is not registered");
 						
 					}
 					
@@ -197,12 +194,6 @@ public class CrimeByCriminalDaoImpl implements CrimeByCriminalDao{
 				{
 					throw new CriminalException("Invalid criminal_id");
 				}
-			}
-			else
-			{
-				throw new CrimeException("Invalid crime_id");
-			}
-			
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

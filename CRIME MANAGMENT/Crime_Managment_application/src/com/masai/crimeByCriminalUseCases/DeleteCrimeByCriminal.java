@@ -7,8 +7,13 @@ import com.masai.crimeByCriminalDao.CrimeByCriminalDao;
 import com.masai.crimeByCriminalDao.CrimeByCriminalDaoImpl;
 
 public class DeleteCrimeByCriminal {
-
-	public static void main(String[] args) {
+	
+	public void deleteCrimeByCriminal()
+	{
+		
+		System.out.println("-----> Alert! <------");
+		System.out.println("These details will not delete from crime and criminal data but combined registered details will be deleted");
+		System.out.println("");
 		
 //		----------------------creating the object of crimebycriminal class to call method----------------------------------
 		
@@ -36,6 +41,12 @@ public class DeleteCrimeByCriminal {
 		catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
+		
+	}
+
+	public static void main(String[] args) {
+
+		new DeleteCrimeByCriminal().deleteCrimeByCriminal();
 		
 	}
 		
