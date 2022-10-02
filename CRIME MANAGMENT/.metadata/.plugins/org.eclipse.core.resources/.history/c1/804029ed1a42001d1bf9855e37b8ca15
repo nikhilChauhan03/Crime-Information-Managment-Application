@@ -585,7 +585,7 @@ public String updateStatusOfCase (int crime_id, String value) throws CrimeExcept
 	
 	
 	
-	//---------------------------------------------get the details of all Unsolved cases----------------------------------------------------------
+	//---------------------------------------------get the details of all solved cases----------------------------------------------------------
 
 		
 		

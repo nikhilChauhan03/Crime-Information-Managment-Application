@@ -321,7 +321,7 @@ public class CriminalDaoImpl implements CriminalDao{
 				
 //				---------creating crime object and add it to list--------------
 				
-				c = new Criminal(Cid, name, add, age, gender, mark, crime, area);
+				 c = new Criminal(Cid, name, add, age, gender, mark, crime, area);
 			}
 			else
 			{

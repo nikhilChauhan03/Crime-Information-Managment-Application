@@ -36,7 +36,7 @@ public class CrimeByCriminalDaoImpl implements CrimeByCriminalDao{
 			if(rs1.next())
 			{
 				
-//		-----------------------------------now if criminal_id is valid check again for the  criminal Id--------------
+//		-----------------------------------now if crime_id is valid check again for the  criminal Id--------------
 				
 				PreparedStatement ps2 = con.prepareStatement("Select * from criminal where criminal_id = ?;");
 				ps2.setInt(1, criminal_id);
@@ -142,7 +142,7 @@ public class CrimeByCriminalDaoImpl implements CrimeByCriminalDao{
 		try(Connection con = DB_Connection.getconnection())
 		{
 			
-//			----> if criminal_id is valid 
+//			----> if crime_id is valid check for criminal_id
 	
 				PreparedStatement ps2 = con.prepareStatement("select case_id from crime_by_criminal where criminal_id = ?;");
 				ps2.setInt(1, criminal_id);
@@ -196,7 +196,7 @@ public class CrimeByCriminalDaoImpl implements CrimeByCriminalDao{
 				}
 			
 		} catch (SQLException e) {
-			
+			// TODO Auto-generated catch block
 			System.out.println(e.getMessage());
 		}
 		
